@@ -7,3 +7,7 @@ class CustomerCreate(BaseModel):
     email: EmailStr = Field(...)
     password: str = Field(...)
     shipping_address: Optional[str] = None
+
+class CustomerLogin(BaseModel):
+    email: EmailStr = Field(...)
+    password: str = Field(...)

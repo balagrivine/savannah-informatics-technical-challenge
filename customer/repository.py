@@ -1,4 +1,5 @@
 import psycopg2
+from psycopg2.extras import DictCursor
 from fastapi import HTTPException
 from typing import Optional
 
@@ -49,7 +50,7 @@ class CustomerRepository(InitDB):
             )
 
     def get_customer_by_id(self, customer_id: int):
-        """Gets a single user from the database"""
+        """Gets a single user from the database with the specified id"""
 
         sql_context = """
         SELECT
@@ -73,5 +74,25 @@ class CustomerRepository(InitDB):
                 status_code=400,
                 detail="Data error occured, possibly due to invalid data"
             )
-        except (psycopg2.Error, Exception):
+    def get_customer_by_email(self, email: str):
+        """Gets a single customer from the database with with the specified email"""
+
+        sql_context = """
+        SELECT
+            id, email, password
+        FROM
+            customers
+        WHERE
+            email=%s;
+        """
+        data = (email,)
+
+        try:
+            with self.conn.cursor(cursor_factory=DictCursor) as cursor:
+                cursor.execute(sql_context, data)
+                customer = cursor.fetchone()
+
+            self.conn.commit()
+            return customer
+        except psycopg2.Error as e:
             pass
