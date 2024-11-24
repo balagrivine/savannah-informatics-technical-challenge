@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from starlette.middleware.sessions import SessionMiddleware
 import os
 
-from customer.routes import customer_router
+from src.customer.routes import customer_router
 
 app = FastAPI(
         title="Savannah E-Commerce",

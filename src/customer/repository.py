@@ -3,7 +3,7 @@ from psycopg2.extras import DictCursor
 from fastapi import HTTPException
 from typing import Optional
 
-from config.database import InitDB
+from configs.database import InitDB
 
 
 class CustomerRepository(InitDB):
