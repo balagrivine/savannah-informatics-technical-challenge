@@ -22,7 +22,7 @@ async def register_customer(customer: CustomerCreate):
         await create_customer(customer)
 
         return JSONResponse(status_code=201, content="Customer registered successfully")
-    except HTTPexception as e:
+    except HTTPException as e:
         raise e
     except Exception as e:
         raise HTTPException(
