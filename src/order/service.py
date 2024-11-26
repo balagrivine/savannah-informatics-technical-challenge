@@ -1,6 +1,7 @@
 from .repository import OrderRepository
 from .schemas import OrderCreate
 
+# Create a Data Transfer Object
 order_repo = OrderRepository()
 
 async def create_new_order(order: OrderCreate):
