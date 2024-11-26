@@ -2,11 +2,10 @@ from pydantic import BaseModel, Field, EmailStr
 from typing import Optional
 
 class CustomerCreate(BaseModel):
-    first_name: str = Field(...)
-    last_name: str = Field(...)
+    name: str = Field(...)
     email: EmailStr = Field(...)
     password: str = Field(...)
-    shipping_address: Optional[str] = None
+    phone_number: str = Field(..., max_length=12, min_length=10)
 
 class CustomerLogin(BaseModel):
     email: EmailStr = Field(...)

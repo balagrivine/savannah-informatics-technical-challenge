@@ -25,6 +25,7 @@ async def register_customer(customer: CustomerCreate):
     except HTTPException as e:
         raise e
     except Exception as e:
+        raise e
         raise HTTPException(
                 status_code=500,
                 detail="An unexpected error occured while registering user"
@@ -40,6 +41,7 @@ async def login_customer(customer: CustomerLogin):
     except HTTPException as e:
             raise e
     except Exception as e:
+        raise e
         raise HTTPException(
                 status_code=500,
                 detail="An unexpected error occured while logging in user"

@@ -15,10 +15,10 @@ async def create_customer(customer: CustomerCreate) -> None:
         hashed_password = pwd_context.hash(customer.password)
 
         customer_repo.create_customer(
-                first_name=customer.first_name,
-                last_name=customer.last_name,
+                name=customer.name,
                 email=customer.email,
-                password=hashed_password
+                password=hashed_password,
+                phone_number=customer.phone_number
             )
         return
     except Exception as e:

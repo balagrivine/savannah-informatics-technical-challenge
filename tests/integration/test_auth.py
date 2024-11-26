@@ -14,10 +14,10 @@ def test_register_success(mocker):
     mock_customer_repo.create_customer.return_value = None
 
     register_data = {
-        "first_name": "first",
-        "last_name": "last",
+        "name": "name",
         "email": "john.doe@example.com",
-        "password": "password"
+        "password": "password",
+        "phone_number": "254700000000"
     }
     response = client.post("/api/v1/register", json=register_data)
 
@@ -26,10 +26,10 @@ def test_register_success(mocker):
 
 def test_register_with_invalid_email():
     login_data = {
-        "first_name": "first",
-        "last_name": "last",
+        "name": "name",
         "email": "invalid_email",
-        "password": "password"
+        "password": "password",
+        "phone_number": "254700000000"
     }
     response = client.post("/api/v1/register", json=login_data)
 
@@ -38,10 +38,10 @@ def test_register_with_invalid_email():
 
 def test_register_with_duplicate_email():
     register_data = {
-        "first_name": "first",
-        "last_name": "last",
+        "name": "name",
         "email": "john.doe@example.com", # Ensure this email already exists in the database
-        "password": "password"
+        "password": "password",
+        "phone_number": "245700000000"
     }
     response = client.post("/api/v1/register", json=register_data)
 
@@ -50,7 +50,7 @@ def test_register_with_duplicate_email():
 
 def test_login_success():
     login_data = {
-        "email": "email@example.com",
+        "email": "john.doe@example.com",
         "password": "password"
     }
     response = client.post("/api/v1/login", json=login_data)

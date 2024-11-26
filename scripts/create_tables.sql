@@ -1,6 +1,5 @@
 -- This script creates sql tables in the database
 
-CREATE DATABASE IF NOT EXISTS savannah_ecommerce
 
 -- Create a customers table if it does not exist in the db
 CREATE TABLE IF NOT EXISTS customers (
@@ -24,7 +23,7 @@ CREATE TABLE IF NOT EXISTS products (
 -- Create an orders table if it does not exist in the db
 CREATE TABLE IF NOT EXISTS orders (
 	id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-	order_date TIMESTAMP NOT NULL DETAULT CURRENT_TIMESTAMP,
+	order_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	total_amount DECIMAL(10, 2) NOT NULL,
 	customer_id INTEGER NOT NULL,
 	product_id INTEGER NOT NULL,

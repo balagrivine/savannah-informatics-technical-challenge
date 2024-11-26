@@ -17,21 +17,20 @@ class CustomerRepository(InitDB):
 
     def create_customer(
             self,
-            first_name: str,
-            last_name: str,
+            name: str,
             email: str,
             password: str,
-            shipping_address: Optional[str]=None
+            phone_number: str
         ):
         """Creates a new customer in the database"""
         
         sql_context = """
         INSERT INTO
-            customers (first_name, last_name, email, password, shipping_address)
+            customers (name, email, password, phone)
         VALUES
-            (%s, %s, %s, %s, %s);
+            (%s, %s, %s, %s);
         """
-        data = (first_name, last_name, email, password, shipping_address)
+        data = (name, email, password, phone_number)
         
         try:
             with self.conn.cursor() as cursor:
@@ -54,7 +53,7 @@ class CustomerRepository(InitDB):
 
         sql_context = """
         SELECT
-            id, first_name, last_name, email, shipping_address
+            id, name, email
         FROM
             customer
         WHERE
