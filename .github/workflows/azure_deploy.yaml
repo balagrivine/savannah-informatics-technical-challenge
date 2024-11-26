@@ -50,12 +50,12 @@ jobs:
           ALGORITHM: ${{secrets.ALGORITHM}}
         run: |
           source env/bin/activate
-          pytest --cov --cov-report-xml --disable-warnings
+          pytest --cov --cov-report=xml --disable-warnings
 
-        - name: Upload coverage reports to Codecov with GitHub Actions
-          uses: codecov/codecov-action@v4.2.0
-          env:
-            CODECOV_TOKEN: ${{secrets.CODECOV_TOKEN}}
+      - name: Upload coverage reports to Codecov with GitHub Actions
+        uses: codecov/codecov-action@v4.2.0
+        env:
+          CODECOV_TOKEN: ${{secrets.CODECOV_TOKEN}}
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
