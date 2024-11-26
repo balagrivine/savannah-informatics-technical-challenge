@@ -46,75 +46,48 @@ class OrderRepository(InitDB):
                     detail="An error occured while creating your order"
                 )
 
-        def get_order_by_id(self, order_id: str):
-            """Gets a specific order by its id"""
+    def get_order_by_id(self, order_id: str):
+        """Gets a specific order by its id"""
 
-            sql_context = """
-            SELECT
-                id, order_date, item, price
-            FROM
-                orders
-            WHERE
-                id = %s;
-            """
-            data = (order_id,)
+        sql_context = """
+        SELECT
+            order_date, product_id, total_amount
+        FROM
+            orders
+        WHERE
+            id = %s;
+        """
+        data = (order_id,)
 
-            try:
-                with self.conn.cursor(cursor_factory=DictCursor) as cursor:
-                    cursor.execute()
-                    order = cursor.fetchone()
+        try:
+            with self.conn.cursor(cursor_factory=DictCursor) as cursor:
+                cursor.execute(sql_context, data)
+                order = cursor.fetchone()
 
-                self.conn.commit()
-                return order
-            except psycopg2.Error:
-                raise HTTPException(
-                        status_code=500,
-                        detail="An unexpected error occured while retrieving the order"
-                    )
+            self.conn.commit()
+            return order
+        except psycopg2.Error:
+            raise HTTPException(
+                    status_code=500,
+                    detail="An unexpected error occured while retrieving the order"
+                )
 
-        def update_order_by_id(
-                self,
-                order_id: int,
-                item: Optional[str]=None,
-                price: Optional[str]=None
-            ):
-            """Updates an order with the procided data"""
+    def delete_order_by_id(self, order_id: str):
+        """Deletes an order record from the database"""
 
-            sql_context = """
-            UPDATE
-                orders
-            SET
-                item = %s, price = %s
-            WHERE
-               id = %s;
-            """
-            data = (item, price, order_id)
+        sql_context = """
+        DELETE FROM
+            orders
+        WHERE
+            id = %s;
+        """
+        data = (order_id,)
 
-            try:
-                with self.conn.cursor() as cursor:
-                    cursor.execute(sql_context, data)
+        try:
+            with self.conn.cursor() as cursor:
+                cursor.execute(sql_context, data)
 
-                self.conn.commit()
-                return
-            except psycopg2.Error:
-                pass
-
-        def delete_order_by_id(self, order_id: str):
-            """Deletes an order record from the database"""
-
-            sql_context = """
-            DELETE FROM
-                orders
-            WHERE
-                id = %s;
-            """
-            data = (order_id,)
-
-            try:
-                with self.conn.cursor() as cursor:
-                    cursor.exceute(sql_context, data)
-
-                self.conn.commit()
-                return
-            except psycopg2.Error:
-                pass
+            self.conn.commit()
+            return
+        except psycopg2.Error:
+            pass

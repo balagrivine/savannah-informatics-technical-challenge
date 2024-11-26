@@ -1,5 +1,4 @@
 from fastapi.testclient import TestClient
-import psycopg2
 import pytest
 from pytest_mock import mocker
 

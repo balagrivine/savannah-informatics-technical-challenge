@@ -48,31 +48,6 @@ class CustomerRepository(InitDB):
                 status_code=409, detail="User with the same email already exists"
             )
 
-    def get_customer_by_id(self, customer_id: int):
-        """Gets a single user from the database with the specified id"""
-
-        sql_context = """
-        SELECT
-            id, name, email
-        FROM
-            customer
-        WHERE
-            id=%s;
-        """
-        data = (customer_id,)
-
-        try:
-            with self.conn.cursor() as cursor:
-                cursor.execute(sql_context, data)
-                customer = cursor.fetchone()
-
-            return customer
-        except psycopg2.DataError:
-            self.conn.rollback()
-            raise HTTPException(
-                status_code=400,
-                detail="Data error occured, possibly due to invalid data"
-            )
     def get_customer_by_email(self, email: str):
         """Gets a single customer from the database with with the specified email"""
 
