@@ -19,11 +19,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # Install dependencies for tests
+      # Install dependencies for running tests
       - name: Install dependencies
         run: |
           python3 -m pip install --upgrade pip
-          python3 -m install requirements.txt
+          python3 -m pip install requirements.txt
 
       # Run pytest to ensure all tests pass
       - name: Run pytest tests
