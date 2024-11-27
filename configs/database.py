@@ -7,11 +7,11 @@ load_dotenv()
 class InitDB:
     """Initializes a postgresql database connection"""
 
-    db_name: str = os.getenv("DB_NAME", "savannah_ecommerce")
-    db_user: str = os.getenv("DB_USER", "postgres")
-    db_password: str = os.getenv("DB_PASSWORD", "postgres")
-    db_port: int = os.getenv("DB_PORT", 5432)
-    db_host: str = os.getenv("DB_HOST", "localhost")
+    db_name: str = os.getenv("DB_NAME")
+    db_user: str = os.getenv("DB_USER")
+    db_password: str = os.getenv("DB_PASSWORD")
+    db_port: int = os.getenv("DB_PORT")
+    db_host: str = os.getenv("DB_HOST")
 
     def connect(self):
         """This method makes a connection to the database"""
