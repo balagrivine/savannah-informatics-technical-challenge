@@ -5,10 +5,10 @@
 This is a web service project developed using the Python FastAPI Framework with Postgres database.
 
 ## Features
-** Create and manage customers.
-  ** Authentication and authorization
-** Create and manage orders
-** When an order is added, send the customer an SMS alerting them
+* Create and manage customers.
+  * Authentication and authorization
+* Create and manage orders
+* When an order is added, send the customer an SMS alerting them
 
 The project is equipped with tests and code coverage metrics using codecov which are all integrated into the CI/CD pipeline. The deployed version of the project is accessible on Azure.
 
@@ -80,6 +80,20 @@ pytest --cov --cov-report=xml
 ````bash
 python3 -m uvicorn main:app
 ````
+
+### Running the application in a Docker container
+
+Build a docker image with the command below
+````bash
+docker buildx build -t ecommerce:latest .
+````
+
+Run the image after a successful build
+
+````bash
+docker run -p 8080:8080 ecommerce
+````
+You can now access your application over here [locahost]("127.0.0.1:8080")
 
 ## CI/CD Workflow
 My CI/CD workflow is powered by GitHub Actions. Inside the pipeline I have steps to run automated tests and collect coverage reports during the build stage. The workflow automates deployment to an Azure app service accessible on [here]("https://savannah-dxcwbscyexfyf5ft.eastus2-01.azurewebsites.net/")
