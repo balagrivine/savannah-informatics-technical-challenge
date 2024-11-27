@@ -93,7 +93,7 @@ Run the image after a successful build
 ````bash
 docker run -p 8080:8080 ecommerce
 ````
-You can now access your application over here [locahost]("127.0.0.1:8080")
+You can now access your application over here [locahost](http://127.0.0.1:8080)
 
 ## CI/CD Workflow
-My CI/CD workflow is powered by GitHub Actions. Inside the pipeline I have steps to run automated tests and collect coverage reports during the build stage. The workflow automates deployment to an Azure app service accessible on [here]("https://savannah-dxcwbscyexfyf5ft.eastus2-01.azurewebsites.net/")
+My CI/CD workflow is powered by GitHub Actions. Inside the pipeline I have steps to run automated tests and collect coverage reports during the build stage. The workflow automates deployment to an Azure app service accessible on [here](https://savannah-dxcwbscyexfyf5ft.eastus2-01.azurewebsites.net/)
