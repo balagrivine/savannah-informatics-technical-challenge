@@ -73,9 +73,11 @@ jobs:
       - name: Build and push container image to registry
         uses: docker/build-push-action@v4
         with:
-          push: true
-          tags: ghcr.io/${{ env.REPO }}:${{ github.sha }}
+          context: .
           file: ./Dockerfile
+          push: true
+          no-cache: true
+          tags: ghcr.io/${{ env.REPO }}:${{ github.sha }}
 
   deploy:
     runs-on: ubuntu-latest
@@ -92,4 +94,4 @@ jobs:
         with:
           app-name: markethub
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-          images: 'ghcr.io/${{ env.REPO }}:${{ github.sha }}'
+          images: ghcr.io/${{ env.REPO }}:${{ github.sha }}
