@@ -70,3 +70,26 @@ class CustomerRepository(InitDB):
             return customer
         except psycopg2.Error as e:
             pass
+
+    def get_customer_by_id(self, customer_id: int):
+        """Gets a single customer from the database with the specified Id"""
+
+        sql_context = """
+        SELECT
+            id, email, phone
+        FROM
+            customers
+        WHERE
+            id=%s;
+        """
+        data = (customer_id,)
+
+        try:
+            with self.conn.cursor(cursor_factory=DictCursor) as cursor:
+                cursor.execute(sql_context, data)
+                customer = cursor.fetchone()
+
+            self.conn.commit()
+            return customer
+        except Exception as e:
+            raise e

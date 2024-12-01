@@ -40,7 +40,8 @@ class OrderRepository(InitDB):
                     status_code=400,
                     detail="A data error occured, possibly due to invalid valus"
                 )
-        except psycopg2.Error:
+        except psycopg2.Error as e:
+            print(e)
             raise HTTPException(
                     status_code=500,
                     detail="An error occured while creating your order"

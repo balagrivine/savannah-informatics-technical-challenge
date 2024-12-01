@@ -10,7 +10,7 @@ client = TestClient(app)
 
 def test_create_order_success():
     order_data = {
-            "customer_id": 1,
+            "customer_id": 7,
             "price": 12.00,
             "item_id": 1
         }

@@ -5,7 +5,7 @@ class CustomerCreate(BaseModel):
     name: str = Field(...)
     email: EmailStr = Field(...)
     password: str = Field(...)
-    phone_number: str = Field(..., max_length=12, min_length=10)
+    phone_number: int = Field(...)
 
 class CustomerLogin(BaseModel):
     email: EmailStr = Field(...)

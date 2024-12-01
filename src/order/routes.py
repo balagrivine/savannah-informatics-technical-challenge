@@ -17,6 +17,7 @@ async def create_order(order: OrderCreate):
     except HTTPException as e:
         raise e
     except Exception as e:
+        print(e)
         raise HTTPException(
                 status_code=500,
                 detail="An unexpected error occured"

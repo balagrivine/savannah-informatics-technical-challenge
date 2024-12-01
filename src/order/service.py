@@ -1,10 +1,13 @@
 from fastapi import HTTPException
 
 from .repository import OrderRepository
+from src.customer.repository import CustomerRepository
 from .schemas import OrderCreate
+from .external import send_sms
 
 # Create a Data Transfer Object
 order_repo = OrderRepository()
+customer_repo = CustomerRepository()
 
 async def create_new_order(order: OrderCreate):
     """Handles business logic behind creating an order in the database"""
@@ -15,6 +18,10 @@ async def create_new_order(order: OrderCreate):
             order_price=order.price,
             item_id=order.item_id
         )
+        order_message = "Your order has been succesfully placed. Thank you for shopping with us."
+        customer = customer_repo.get_customer_by_id(order.customer_id)
+
+        await send_sms(customer["phone"], order_message)
         return
     except Exception as e:
         raise e
