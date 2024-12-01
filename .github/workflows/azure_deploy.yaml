@@ -48,6 +48,8 @@ jobs:
           DB_HOST: ${{secrets.DB_HOST}}
           SECRET_KEY: ${{secrets.SECRET_KEY}}
           ALGORITHM: ${{secrets.ALGORITHM}}
+          AFRICAS_TALKING_API_KEY: ${{ secrets.AFRICAS_TALKING_API_KEY }}
+          AFRICAS_TALKING_USERNAME: ${{ secrets.AFRICAS_TALKING_USERNAME }}
         run: |
           source env/bin/activate
           pytest --cov --cov-report=xml --disable-warnings
